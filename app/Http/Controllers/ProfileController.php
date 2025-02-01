@@ -70,8 +70,14 @@ class ProfileController extends Controller
     }
 
     public function deleteUser() {
+        
         $user = Auth::user();
-        $user->delete();
-        return redirect()->route('home')->with('status', 'Usuario eliminado correctamente');
+       if ($user->id === 1) {
+            return redirect()->back()->with('error', 'No puedes eliminar al superadmin');
+        }
+        else {      
+            $user->delete();
+            return redirect()->route('home')->with('status', 'Usuario eliminado correctamente');
+        }
     }
 }
