@@ -54,3 +54,23 @@ php artisan migrate
 
 # More info available on the following portfolio:
 https://danielfo684.github.io/Portfolio/
+
+
+# Code and UI:
+
+## Screenshots
+
+### User List
+![User List](/documentation/usuarios.png)
+
+### User Creation
+![User Creation](/documentation/login.png)
+
+### User Editing
+![User Editing](/documentation/perfil.png)
+
+### Middleware
+![Admin Panel](/documentation/middleware.png)
+
+### Migration
+![Admin Panel](/documentation/base%20migration.png.png)
