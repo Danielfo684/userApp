@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserManagementController;
-
+use App\Http\Middleware\AdminMiddleware;
 
 /*Route::get('/', function () {
     return view('welcome');
@@ -21,7 +21,7 @@ Route::post('/profile/change-password', [ProfileController::class, 'changePasswo
 Route::post('/profile/change-email', [ProfileController::class, 'changeEmail'])->name('profile.changeEmail');
 Route::post('/profile/change-username', [ProfileController::class, 'changeUsername'])->name('profile.changeUsername');
 
-Route::middleware(['auth', ])->group(function () {
+Route::middleware(['auth', 'admin' ])->group(function () {
     Route::get('/users', [UserManagementController::class, 'index'])->name('users.index');
     Route::get('/users/create', [UserManagementController::class, 'create'])->name('users.create');
     Route::post('/users', [UserManagementController::class, 'store'])->name('users.store');
@@ -30,4 +30,5 @@ Route::middleware(['auth', ])->group(function () {
     Route::delete('/users/{user}', [UserManagementController::class, 'destroy'])->name('users.destroy');
     Route::get('/admin/users', [UserManagementController::class, 'index'])->name('users.index');
     Route::get('/admin/users/{user}/edit', [UserManagementController::class, 'edit'])->name('users.edit');
+    Route::put('/admin/users/{user}/verify', [UserManagementController::class, 'verify'])->name('users.verify');
 });

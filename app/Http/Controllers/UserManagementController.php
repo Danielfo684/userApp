@@ -13,12 +13,16 @@ class UserManagementController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(middleware: 'auth');
-        //$this->middleware(middleware: 'check.role:admin');
-    }
+        $this->middleware(middleware: 'auth', );
+        // $this->middleware([ 'auth', 'checkRole:admin']);
 
-    public function index()
+        }
+
+    public function index(User $user)
     {
+        // if ($user->role !== 'admin') {
+        //     return redirect()->route('home')->with('error', 'You cannot access this page');
+        // }
         $users = User::orderBy('id')->get();
         return view('users.index', compact('users'));
     }
@@ -27,6 +31,9 @@ class UserManagementController extends Controller
     {
         if ($user->id  === 1) {
             return redirect()->back()->with('error', 'You cannot edit superadmin');
+        }
+        if ($user->role === 'admin') {
+            return redirect()->back()->with('error', 'You cannot access this page');
         }
         return view('users.edit', compact('user'));
     }
@@ -62,9 +69,22 @@ class UserManagementController extends Controller
         ]);
     
         return redirect()->route('users.index')
-            ->with('status', 'Usuario creado correctamente');
+            ->with('status', 'User created successfully');
     }
     
+    public function verify (Request $request, User $user) {
+        if ($user->id === 1) {
+            return redirect()->back()->with('error', 'You cannot verify superadmin');
+        }
+        if ($user->email_verified_at !== null) {
+            return redirect()->back()->with('error', 'User already verified');
+        }
+        $user->email_verified_at = now();
+        $user->save();
+        return redirect()->back()->with('status', 'Verified properly');
+
+
+    }
     public function update(Request $request, User $user)
     {
 

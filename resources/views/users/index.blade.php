@@ -46,7 +46,7 @@
                                         @if($user->email_verified_at)
                                             <span class="text-success">Sí</span>
                                         @else
-                                            <span class="text-danger">No</span>
+                                            <span class="">No</span>
                                         @endif
                                     </td>
                                     <td>
@@ -56,9 +56,16 @@
                                                 <form action="{{ route('users.destroy', $user) }}" method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-warning btn-sm" onclick="return confirm('¿Estás seguro?')">Eliminar</button>
+                                                    <button type="submit" class="btn btn-warning btn-sm" onclick="return confirm('¿Are you sure you want to delete this user?')">Eliminar</button>
                                                 </form>
                                             @endif
+                                            @if(!$user->email_verified_at)
+                                            <form method="POST" action="{{ route('users.verify', $user->id) }}" style="display: inline;">
+                                                @csrf
+                                                @method('PUT')
+                                                <button type="submit" class="btn btn-sm btn-success" onclick="return confirm('Are you sure you want to verify this user?')">Verificar</button>
+                                            </form>
+                                        @endif
                                         </div>
                                     </td>
                                 </tr>

@@ -18,8 +18,8 @@ class SuperAdminMiddleware
     {
         $user = Auth::user();
         $user = $request->user();
-        if($user == null || $user->role != 'admin') {
-            return redirect()->route('index');
+        if($user == null || $user->role !== 'admin') {
+            return redirect()->route('home');
         }
         return $next($request);
     }
