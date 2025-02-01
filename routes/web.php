@@ -20,8 +20,9 @@ Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show')
 Route::post('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
 Route::post('/profile/change-email', [ProfileController::class, 'changeEmail'])->name('profile.changeEmail');
 Route::post('/profile/change-username', [ProfileController::class, 'changeUsername'])->name('profile.changeUsername');
+Route::delete('/profile/delete-user', [ProfileController::class, 'deleteUser'])->name('profile.deleteUser');
 
-Route::middleware(['auth', 'admin' ])->group(function () {
+Route::middleware(['auth', ])->group(function () {
     Route::get('/users', [UserManagementController::class, 'index'])->name('users.index');
     Route::get('/users/create', [UserManagementController::class, 'create'])->name('users.create');
     Route::post('/users', [UserManagementController::class, 'store'])->name('users.store');

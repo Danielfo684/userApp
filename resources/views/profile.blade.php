@@ -121,6 +121,21 @@
                             </div>
                         </div>
                     </form>
+
+                    <hr>
+
+                    <form method="POST" action="{{ route('profile.deleteUser') }}">
+                        @csrf
+                        @method('DELETE')
+                        <div class="row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this user?')">
+                                    {{ __('Eliminar Usuario') }}
+                                    
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

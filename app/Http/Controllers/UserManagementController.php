@@ -8,12 +8,12 @@ use App\Http\Middleware\SuperAdminMiddleware;
 use App\Http\Middleware\AdminMiddleware;
 
 
-
 class UserManagementController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(middleware: 'auth', );
+        $this->middleware(middleware: 'auth');
+        $this->middleware(AdminMiddleware::class);
         // $this->middleware([ 'auth', 'checkRole:admin']);
 
         }

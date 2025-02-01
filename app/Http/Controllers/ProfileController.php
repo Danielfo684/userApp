@@ -68,4 +68,10 @@ class ProfileController extends Controller
 
         return back()->with('status', 'Nombre de usuario cambiado con éxito');
     }
+
+    public function deleteUser() {
+        $user = Auth::user();
+        $user->delete();
+        return redirect()->route('home')->with('status', 'Usuario eliminado correctamente');
+    }
 }
