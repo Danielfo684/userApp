@@ -73,4 +73,4 @@ https://danielfo684.github.io/Portfolio/
 ![Admin Panel](/documentation/middleware.png)
 
 ### Migration
-![Admin Panel](/documentation/base%20migration.png.png)
+![Admin Panel](/documentation/migration.png)
