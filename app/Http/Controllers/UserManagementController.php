@@ -29,10 +29,10 @@ class UserManagementController extends Controller
 
     public function edit(User $user)
     {
-        if ($user->id  === 1) {
+        if ($user->id  === 1 && auth()->user()->id !== 1) {
             return redirect()->back()->with('error', 'You cannot edit superadmin');
         }
-        if ($user->role === 'admin') {
+        if ($user->role === 'admin' && auth()->user()->id !== 1) {
             return redirect()->back()->with('error', 'You cannot access this page');
         }
         return view('users.edit', compact('user'));
@@ -73,7 +73,7 @@ class UserManagementController extends Controller
     }
     
     public function verify (Request $request, User $user) {
-        if ($user->id === 1) {
+        if ($user->id === 1 && auth()->user()->id !== 1) {
             return redirect()->back()->with('error', 'You cannot verify superadmin');
         }
         if ($user->email_verified_at !== null) {
@@ -88,7 +88,7 @@ class UserManagementController extends Controller
     public function update(Request $request, User $user)
     {
 
-        if ($user->id === 1) {
+        if ($user->id === 1 && auth()->user()->id !== 1) {
             return redirect()->back()->with('error', 'You cannot edit superadmin');
 
         }
@@ -99,6 +99,10 @@ class UserManagementController extends Controller
         ]);
         $user->update($request->only(['name', 'email']));
         if ($request->has('role')) {
+            if ($user->id === 1 && $user->role !== 'admin') {
+                return redirect()->back()->with('error', 'You cannot edit superadmin role');
+
+            } else
             $user->update($request->only('name', 'email', 'role'));
         }
         return redirect()->route('users.index')
