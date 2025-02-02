@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">Bienvenido a UserApp</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,10 +14,9 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
                    
                     @if(auth()->user()->role !== 'user')
-                    <a href="{{ route('users.index') }}" class="btn btn-primary btn-sm">Open Gestión de Usuarios</a>
+                    <a href="{{ route('users.index') }}" class="btn btn-primary btn-sm">Abrir Gestión de Usuarios</a>
                     @endif                     
                 </div>
             </div>

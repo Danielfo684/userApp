@@ -30,8 +30,9 @@
                                     <th>ID</th>
                                     <th>Nombre</th>
                                     <th>Email</th>
-                                    <th>Rol</th>
+                                   
                                     <th>Verificado</th>
+                                    <th>Rol</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -41,16 +42,22 @@
                                     <td>{{ $user->id }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td>{{ ucfirst($user->role) }}</td>
                                     <td>
                                         @if($user->email_verified_at)
-                                            <span class="text-success">Sí</span>
+                                            <span class="">✅</span>
                                         @else
-                                            <span class="">No</span>
+                                            <span class="">❌</span>
                                         @endif
                                     </td>
+                                    @if ($user->id === 1)
+                                        <td>Super-Admin</td>
+                                    @else    
+                                    <td>{{ ucfirst($user->role) }}</td>
+                                    @endif
+                               
+                                    
                                     <td>
-                                        <div class="btn-group" role="group">
+                                        <div class="btn-group gap-3" role="group">
                                             <a href="{{ route('users.edit', $user) }}" class="btn btn-info btn-sm">Editar</a>
                                             @if(auth()->user()->id !== $user->id && $user->id !== 1)
                                                 <form action="{{ route('users.destroy', $user) }}" method="POST" class="d-inline">

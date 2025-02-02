@@ -99,7 +99,7 @@ class UserManagementController extends Controller
         ]);
         $user->update($request->only(['name', 'email']));
         if ($request->has('role')) {
-            if ($user->id === 1 && $user->role !== 'admin') {
+            if ($user->id === 1 && $request->role !== 'admin') {
                 return redirect()->back()->with('error', 'You cannot edit superadmin role');
 
             } else
